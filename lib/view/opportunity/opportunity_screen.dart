@@ -1,0 +1,55 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:nasa_app/view/opportunity/opportunity_controller.dart';
+import 'package:nasa_app/constants/page_status.dart';
+import 'package:nasa_app/view/gridview_page.dart';
+
+
+class OpportunityScreen extends StatefulWidget {
+  OpportunityScreen({Key? key}) : super(key: key);
+
+  @override
+  State<OpportunityScreen> createState() => _OpportunityScreenState();
+}
+
+class _OpportunityScreenState extends State<OpportunityScreen> {
+  late ScrollController scrollController;
+  final OpportunityController controller = Get.put(OpportunityController());
+
+  @override
+  void initState() {
+    createScrollController();
+    //controller.getInitialPhotos();
+    super.initState();
+  }
+
+  void createScrollController() {
+    scrollController = ScrollController();
+    scrollController.addListener(() => loadMorePhotos());
+  }
+
+  Future<void> loadMorePhotos() async {
+    if (scrollController.position.pixels >=
+            scrollController.position.maxScrollExtent &&
+        controller.pageStatus.value != PageStatus.newPageLoading) {
+      print("ffdfsfd");
+      await controller.loadMorePhotos();
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Obx(() => GridViewPage(
+          pageStatus: controller.pageStatus.value,
+          itemCount: controller.opportunityList.length,
+          photoList: controller.opportunityList,
+          controller: scrollController,
+        ));
+  }
+
+  @override
+  void dispose() {
+    scrollController.dispose();
+    super.dispose();
+  }
+}

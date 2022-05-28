@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:nasa_app/screens/gridview_page.dart';
+import 'package:nasa_app/view/curiosity/curiosity_screen.dart';
+import 'package:nasa_app/view/opportunity/opportunity_screen.dart';
+import 'package:nasa_app/view/spirit/spirit_screen.dart';
 
 
 class HomePage extends StatefulWidget {
@@ -18,21 +20,21 @@ class _HomePageState extends State<HomePage> {
             appBar: AppBar(
               bottom: const TabBar(tabs: [
                 Tab(
-                  text: "Tab 1",
+                  text: "Curiosity",
                 ),
                 Tab(
-                  text: "Tab 2",
+                  text: "Opportunity",
                 ),
                 Tab(
-                  text: "Tab 3",
+                  text: "Spirit",
                 )
               ]),
             ),
-            body: const TabBarView(
+            body: TabBarView(
               children: [
-                GridViewPage(),
-                SizedBox(),
-                SizedBox(),
+                CuriosityScreen(),
+                OpportunityScreen(),
+                SpiritScreen(),
               ],
             )));
   }
