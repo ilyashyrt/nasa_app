@@ -11,13 +11,20 @@ import 'package:http/http.dart' as http;
 import '../../constants/app_constants.dart';
 
 class CuriosityController extends GetxController {
+  var curiosityCameraList = [].obs;
   List<Photos> curiosityList = [];
   var pageStatus = PageStatus.idle.obs;
   var pageKey = 1.obs;
 
-  Future<void> getData(int pageKey) async {
-    String apiUrl =
+  Future<void> getData(int pageKey,{String? cameraName}) async {
+    String apiUrl = "";
+    if(cameraName == null){
+      apiUrl =
         "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=100&api_key=${AppConstants.apiKey}&page=$pageKey";
+    }else{
+      apiUrl =
+        "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=100&camera=$cameraName&api_key=${AppConstants.apiKey}&page=$pageKey";
+    }
     final response = await http.get(Uri.parse(apiUrl));
     print(apiUrl);
     try {
