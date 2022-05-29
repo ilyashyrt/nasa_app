@@ -4,7 +4,6 @@ import 'package:nasa_app/view/spirit/spirit_controller.dart';
 import 'package:nasa_app/constants/page_status.dart';
 import 'package:nasa_app/view/gridview_page.dart';
 
-
 class SpiritScreen extends StatefulWidget {
   SpiritScreen({Key? key}) : super(key: key);
 
@@ -42,6 +41,7 @@ class _SpiritScreenState extends State<SpiritScreen> {
         pageStatus: controller.pageStatus.value,
         itemCount: controller.spiritList.length,
         photoList: controller.spiritList,
-        controller: scrollController));
+        controller: scrollController,
+        pageKey: const PageStorageKey<String>('spirit')));
   }
 }

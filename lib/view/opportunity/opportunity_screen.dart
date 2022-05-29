@@ -44,6 +44,7 @@ class _OpportunityScreenState extends State<OpportunityScreen> {
           itemCount: controller.opportunityList.length,
           photoList: controller.opportunityList,
           controller: scrollController,
+          pageKey: const PageStorageKey<String>('opportunity'),
         ));
   }
 

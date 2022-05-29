@@ -5,20 +5,21 @@ import 'package:nasa_app/view/curiosity/curiosity_controller.dart';
 import 'package:nasa_app/models/nasa_model.dart';
 import 'package:nasa_app/constants/page_status.dart';
 
-PageStorageKey pageStorageKey = const PageStorageKey("pageStorageKey");
-final PageStorageBucket pageStorageBucket = PageStorageBucket();
 
+final PageStorageBucket pageStorageBucket = PageStorageBucket();
+ 
 class GridViewPage extends StatefulWidget {
   final PageStatus pageStatus;
   final int itemCount;
   final List<Photos> photoList;
   final ScrollController controller;
+  final Key pageKey;
   const GridViewPage(
       {Key? key,
       required this.pageStatus,
       required this.itemCount,
       required this.photoList,
-      required this.controller})
+      required this.controller, required this.pageKey})
       : super(key: key);
 
   @override
@@ -26,6 +27,7 @@ class GridViewPage extends StatefulWidget {
 }
 
 class _GridViewPageState extends State<GridViewPage> {
+  
   final CuriosityController controller = Get.put(CuriosityController());
 
   @override
@@ -34,12 +36,12 @@ class _GridViewPageState extends State<GridViewPage> {
         body: Padding(
       padding: const EdgeInsets.all(8.0),
       child: body(widget.pageStatus, widget.itemCount, widget.photoList,
-          widget.controller),
+          widget.controller,widget.pageKey),
     ));
   }
 
   Widget body(PageStatus pageStatus, int itemCount, List<Photos> photoList,
-      ScrollController controller) {
+      ScrollController controller,Key pageKey) {
     switch (pageStatus) {
       case PageStatus.idle:
         return idleWidget();
@@ -51,23 +53,23 @@ class _GridViewPageState extends State<GridViewPage> {
         return firstPageNoItemsFoundWidget();
       case PageStatus.newPageLoaded:
       case PageStatus.firstPageLoaded:
-        return firstPageLoadedWidget(itemCount, photoList, controller);
+        return firstPageLoadedWidget(itemCount, photoList, controller,pageKey);
       case PageStatus.newPageLoading:
-        return newPageLoadingWidget(itemCount, photoList, controller);
+        return newPageLoadingWidget(itemCount, photoList, controller,pageKey);
       case PageStatus.newPageError:
-        return newPageErrorWidget(itemCount, photoList, controller);
+        return newPageErrorWidget(itemCount, photoList, controller,pageKey);
       case PageStatus.newPageNoItemsFound:
-        return newPageNoItemsFoundWidget(itemCount, photoList, controller);
+        return newPageNoItemsFoundWidget(itemCount, photoList, controller,pageKey);
     }
   }
 
   Widget gridViewBuilder(int itemCount, List<Photos> photoList,
-      ScrollController scrollController) {
+      ScrollController scrollController,Key pageKey) {
     if (scrollController.hasClients == true) {
       scrollController.jumpTo(scrollController.position.maxScrollExtent);
     }
     return PageStorage(
-        key: pageStorageKey,
+        key: pageKey,
         bucket: pageStorageBucket,
         child: GridView.builder(
             controller: scrollController,
@@ -112,8 +114,8 @@ class _GridViewPageState extends State<GridViewPage> {
   }
 
   Widget firstPageLoadedWidget(
-      int itemCount, List<Photos> photoList, ScrollController controller) {
-    return gridViewBuilder(itemCount, photoList, controller);
+      int itemCount, List<Photos> photoList, ScrollController controller,Key pageKey) {
+    return gridViewBuilder(itemCount, photoList, controller,pageKey);
   }
 
   Widget firstPageErrorWidget() {
@@ -123,21 +125,21 @@ class _GridViewPageState extends State<GridViewPage> {
   }
 
   Widget newPageLoadingWidget(
-      int itemCount, List<Photos> photoList, ScrollController controller) {
+      int itemCount, List<Photos> photoList, ScrollController controller,Key pageKey) {
     return Stack(
       children: [
-        gridViewBuilder(itemCount, photoList, controller),
+        gridViewBuilder(itemCount, photoList, controller,pageKey),
         bottomIndicator(),
       ],
     );
   }
 
   Widget newPageNoItemsFoundWidget(
-      int itemCount, List<Photos> photoList, ScrollController controller) {
+      int itemCount, List<Photos> photoList, ScrollController controller,Key pageKey) {
     return Column(
       children: [
         Expanded(
-          child: gridViewBuilder(itemCount, photoList, controller),
+          child: gridViewBuilder(itemCount, photoList, controller,pageKey),
         ),
         bottomMessage("İlave içerik bulunamadı")
       ],
@@ -145,11 +147,11 @@ class _GridViewPageState extends State<GridViewPage> {
   }
 
   Widget newPageErrorWidget(
-      int itemCount, List<Photos> photoList, ScrollController controller) {
+      int itemCount, List<Photos> photoList, ScrollController controller,Key pageKey) {
     return Column(
       children: [
         Expanded(
-          child: gridViewBuilder(itemCount, photoList, controller),
+          child: gridViewBuilder(itemCount, photoList, controller,pageKey),
         ),
         bottomMessage("Yeni sayfa bulunamadı")
       ],

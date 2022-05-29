@@ -43,6 +43,7 @@ class _CuriosityScreenState extends State<CuriosityScreen> {
           itemCount: controller.curiosityList.length,
           photoList: controller.curiosityList,
           controller: scrollController,
+          pageKey: const PageStorageKey<String>('curiosity'),
         ));
   }
 
