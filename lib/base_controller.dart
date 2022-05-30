@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class BaseController extends GetxController {
@@ -14,6 +13,8 @@ class BaseController extends GetxController {
     "pancam",
     "minites"
   ].obs;
-  var opportunityAndSpiritCameraList =
+  var opportunityCameraList =
+      ["fhaz", "rhaz", "navcam", "pancam", "minites"].obs;
+  var spiritCameraList =
       ["fhaz", "rhaz", "navcam", "pancam", "minites"].obs;
 }

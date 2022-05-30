@@ -1,8 +1,6 @@
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:http/http.dart';
 import 'package:nasa_app/models/nasa_model.dart';
 
 import 'package:nasa_app/constants/page_status.dart';
@@ -42,11 +40,11 @@ class CuriosityController extends GetxController {
     super.onInit();
   }
 
-  Future getInitialPhotos() async {
+  Future getInitialPhotos({String? cameraName}) async {
     pageStatus.value = PageStatus.firstPageLoading;
 
     try {
-      await getData(1);
+      await getData(1,cameraName: cameraName);
       if (curiosityList.isEmpty) {
         pageStatus.value = PageStatus.firstPageNoItemsFound;
       } else {
@@ -57,13 +55,13 @@ class CuriosityController extends GetxController {
     }
   }
 
-  Future loadMorePhotos() async {
+  Future loadMorePhotos({String? cameraName}) async {
     pageStatus.value = PageStatus.newPageLoading;
     pageKey++;
 
     try {
       int currentPhotosCount = curiosityList.length;
-      await getData(pageKey.value);
+      await getData(pageKey.value,cameraName: cameraName);
       if (currentPhotosCount == curiosityList.length) {
         pageStatus.value = PageStatus.newPageNoItemsFound;
       } else {

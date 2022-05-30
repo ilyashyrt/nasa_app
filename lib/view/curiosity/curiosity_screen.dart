@@ -6,7 +6,7 @@ import 'package:nasa_app/view/gridview_page.dart';
 
 
 class CuriosityScreen extends StatefulWidget {
-  CuriosityScreen({Key? key}) : super(key: key);
+  const CuriosityScreen({Key? key}) : super(key: key);
 
   @override
   State<CuriosityScreen> createState() => _CuriosityScreenState();

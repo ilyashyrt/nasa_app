@@ -21,7 +21,7 @@ class _HomePageState extends State<HomePage> {
         length: 3,
         child: Scaffold(
             appBar: CustomAppBar(baseController: baseController,),
-            body: TabBarView(
+            body: const TabBarView(
               children: [
                 CuriosityScreen(),
                 OpportunityScreen(),

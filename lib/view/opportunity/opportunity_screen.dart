@@ -6,7 +6,7 @@ import 'package:nasa_app/view/gridview_page.dart';
 
 
 class OpportunityScreen extends StatefulWidget {
-  OpportunityScreen({Key? key}) : super(key: key);
+  const OpportunityScreen({Key? key}) : super(key: key);
 
   @override
   State<OpportunityScreen> createState() => _OpportunityScreenState();

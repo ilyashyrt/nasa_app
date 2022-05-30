@@ -5,7 +5,7 @@ import 'package:nasa_app/constants/page_status.dart';
 import 'package:nasa_app/view/gridview_page.dart';
 
 class SpiritScreen extends StatefulWidget {
-  SpiritScreen({Key? key}) : super(key: key);
+  const SpiritScreen({Key? key}) : super(key: key);
 
   @override
   State<SpiritScreen> createState() => _SpiritScreenState();

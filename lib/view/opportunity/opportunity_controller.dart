@@ -11,9 +11,15 @@ class OpportunityController extends GetxController{
   var pageStatus = PageStatus.idle.obs;
   var pageKey = 1.obs;
 
-  Future<void> getData(int pageKey) async {
-    String apiUrl =
+  Future<void> getData(int pageKey,{String? cameraName}) async {
+    String apiUrl = "";
+    if(cameraName == null){
+      apiUrl =
         "https://api.nasa.gov/mars-photos/api/v1/rovers/opportunity/photos?sol=100&api_key=${AppConstants.apiKey}&page=$pageKey";
+    }else{
+      apiUrl =
+        "https://api.nasa.gov/mars-photos/api/v1/rovers/opportunity/photos?sol=100&camera=$cameraName&api_key=${AppConstants.apiKey}&page=$pageKey";
+    }
     final response = await http.get(Uri.parse(apiUrl));
     print(apiUrl);
     try {
@@ -31,11 +37,11 @@ class OpportunityController extends GetxController{
     super.onInit();
   }
 
-  Future getInitialPhotos() async {
+  Future getInitialPhotos({String? cameraName}) async {
     pageStatus.value = PageStatus.firstPageLoading;
 
     try {
-      await getData(1);
+      await getData(1,cameraName: cameraName);
       if (opportunityList.isEmpty) {
         pageStatus.value = PageStatus.firstPageNoItemsFound;
       } else {
@@ -46,13 +52,13 @@ class OpportunityController extends GetxController{
     }
   }
 
-  Future loadMorePhotos() async {
+  Future loadMorePhotos({String? cameraName}) async {
     pageStatus.value = PageStatus.newPageLoading;
     pageKey++;
 
     try {
       int currentPhotosCount = opportunityList.length;
-      await getData(pageKey.value);
+      await getData(pageKey.value,cameraName: cameraName);
       if (currentPhotosCount == opportunityList.length) {
         pageStatus.value = PageStatus.newPageNoItemsFound;
       } else {
