@@ -42,7 +42,7 @@ class _CuriosityScreenState extends State<CuriosityScreen> {
           itemCount: controller.curiosityList.length,
           photoList: controller.curiosityList,
           controller: scrollController,
-          pageKey: PageStorageKey<String>(controller.curiosityCameraName.value == "" ? "curiosity" : "curiosity" + controller.curiosityCameraName.value),
+          pageKey: PageStorageKey<String>(controller.curiosityCameraName.value == "" ? "curiosity" : "curiosity" + controller.curiosityCameraName.value + controller.pageStorageIndex.string),
         ));
   }
 

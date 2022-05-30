@@ -14,6 +14,7 @@ class CuriosityController extends GetxController {
   List<Photos> curiosityList = [];
   var pageStatus = PageStatus.idle.obs;
   var pageKey = 1.obs;
+  var pageStorageIndex = 0.obs;
 
   Future<void> getData(int pageKey,{String? cameraName}) async {
     String apiUrl = "";

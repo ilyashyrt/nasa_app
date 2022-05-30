@@ -11,6 +11,7 @@ class OpportunityController extends GetxController{
   List<Photos> opportunityList = [];
   var pageStatus = PageStatus.idle.obs;
   var pageKey = 1.obs;
+  var pageStorageIndex = 0.obs;
 
   Future<void> getData(int pageKey,{String? cameraName}) async {
     String apiUrl = "";

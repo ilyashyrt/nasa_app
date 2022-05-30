@@ -42,6 +42,6 @@ class _SpiritScreenState extends State<SpiritScreen> {
         itemCount: controller.spiritList.length,
         photoList: controller.spiritList,
         controller: scrollController,
-        pageKey: PageStorageKey<String>(controller.spiritCameraName.value == "" ? "spirit" : "spirit" + controller.spiritCameraName.value)));
+        pageKey: PageStorageKey<String>(controller.spiritCameraName.value == "" ? "spirit" : "spirit" + controller.spiritCameraName.value + controller.pageStorageIndex.string)));
   }
 }

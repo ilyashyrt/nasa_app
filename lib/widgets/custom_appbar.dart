@@ -75,16 +75,19 @@ class _CustomAppBarState extends State<CustomAppBar> {
             curiosityController.curiosityCameraName.value = itemList[index];
             curiosityController.curiosityList.clear();
             curiosityController.pageKey.value = 1;
+            curiosityController.pageStorageIndex.value++;
             curiosityController.getInitialPhotos(cameraName: itemList[index]);
           } else if (opportunityController != null) {
             opportunityController.opportunityCameraName.value = itemList[index];
             opportunityController.opportunityList.clear();
             opportunityController.pageKey.value = 1;
+            opportunityController.pageStorageIndex.value++;
             opportunityController.getInitialPhotos(cameraName: itemList[index]);
           } else if (spiritController != null) {
             spiritController.spiritCameraName.value = itemList[index];
             spiritController.spiritList.clear();
             spiritController.pageKey.value = 1;
+            spiritController.pageStorageIndex.value++;
             spiritController.getInitialPhotos(cameraName: itemList[index]);
           }
         },

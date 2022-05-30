@@ -44,7 +44,7 @@ class _OpportunityScreenState extends State<OpportunityScreen> {
           itemCount: controller.opportunityList.length,
           photoList: controller.opportunityList,
           controller: scrollController,
-          pageKey: PageStorageKey<String>(controller.opportunityCameraName.value == "" ? "opportunity" : "opportunity" + controller.opportunityCameraName.value),
+          pageKey: PageStorageKey<String>(controller.opportunityCameraName.value == "" ? "opportunity" : "opportunity" + controller.opportunityCameraName.value + controller.pageStorageIndex.string),
         ));
   }
 
