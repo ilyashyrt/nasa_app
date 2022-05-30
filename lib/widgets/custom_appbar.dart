@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nasa_app/base_controller.dart';
+import 'package:nasa_app/constants/app_constants.dart';
 import 'package:nasa_app/view/curiosity/curiosity_controller.dart';
 import 'package:nasa_app/view/opportunity/opportunity_controller.dart';
 import 'package:nasa_app/view/spirit/spirit_controller.dart';
@@ -27,6 +28,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
   Widget build(BuildContext context) {
     return Obx(() {
       return AppBar(
+        backgroundColor: AppConstants.nasaBlueColor,
         actions: [
           widget.baseController.initialIndex.value == 0
               ? PopupMenuButton(

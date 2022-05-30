@@ -4,10 +4,10 @@ import 'package:get/get.dart';
 import 'package:nasa_app/view/curiosity/curiosity_controller.dart';
 import 'package:nasa_app/models/nasa_model.dart';
 import 'package:nasa_app/constants/page_status.dart';
-
+import 'package:nasa_app/widgets/blurry_dialog.dart';
 
 final PageStorageBucket pageStorageBucket = PageStorageBucket();
- 
+
 class GridViewPage extends StatefulWidget {
   final PageStatus pageStatus;
   final int itemCount;
@@ -19,7 +19,8 @@ class GridViewPage extends StatefulWidget {
       required this.pageStatus,
       required this.itemCount,
       required this.photoList,
-      required this.controller, required this.pageKey})
+      required this.controller,
+      required this.pageKey})
       : super(key: key);
 
   @override
@@ -27,7 +28,6 @@ class GridViewPage extends StatefulWidget {
 }
 
 class _GridViewPageState extends State<GridViewPage> {
-  
   final CuriosityController controller = Get.put(CuriosityController());
 
   @override
@@ -36,12 +36,12 @@ class _GridViewPageState extends State<GridViewPage> {
         body: Padding(
       padding: const EdgeInsets.all(8.0),
       child: body(widget.pageStatus, widget.itemCount, widget.photoList,
-          widget.controller,widget.pageKey),
+          widget.controller, widget.pageKey),
     ));
   }
 
   Widget body(PageStatus pageStatus, int itemCount, List<Photos> photoList,
-      ScrollController controller,Key pageKey) {
+      ScrollController controller, Key pageKey) {
     switch (pageStatus) {
       case PageStatus.idle:
         return idleWidget();
@@ -53,18 +53,19 @@ class _GridViewPageState extends State<GridViewPage> {
         return firstPageNoItemsFoundWidget();
       case PageStatus.newPageLoaded:
       case PageStatus.firstPageLoaded:
-        return firstPageLoadedWidget(itemCount, photoList, controller,pageKey);
+        return firstPageLoadedWidget(itemCount, photoList, controller, pageKey);
       case PageStatus.newPageLoading:
-        return newPageLoadingWidget(itemCount, photoList, controller,pageKey);
+        return newPageLoadingWidget(itemCount, photoList, controller, pageKey);
       case PageStatus.newPageError:
-        return newPageErrorWidget(itemCount, photoList, controller,pageKey);
+        return newPageErrorWidget(itemCount, photoList, controller, pageKey);
       case PageStatus.newPageNoItemsFound:
-        return newPageNoItemsFoundWidget(itemCount, photoList, controller,pageKey);
+        return newPageNoItemsFoundWidget(
+            itemCount, photoList, controller, pageKey);
     }
   }
 
   Widget gridViewBuilder(int itemCount, List<Photos> photoList,
-      ScrollController scrollController,Key pageKey) {
+      ScrollController scrollController, Key pageKey) {
     if (scrollController.hasClients == true) {
       scrollController.jumpTo(scrollController.position.maxScrollExtent);
     }
@@ -80,18 +81,31 @@ class _GridViewPageState extends State<GridViewPage> {
                 mainAxisSpacing: 20),
             itemCount: itemCount,
             itemBuilder: (BuildContext context, index) {
-              return GridTile(
-                child: CachedNetworkImage(
-                  imageUrl: photoList[index].imgSrc.toString(),
-                  fit: BoxFit.cover,
-                ),
-                footer: GridTileBar(
-                  backgroundColor: Colors.black54,
-                  title: Center(
-                    child: Text(
-                      photoList[index].id.toString(),
-                      style: const TextStyle(
-                          fontSize: 18, fontWeight: FontWeight.bold),
+              return InkWell(
+                onTap: () {
+                  BlurryDialog alert = BlurryDialog( photoList: photoList,index: index, content: "fdsdfdsdfs",
+                      );
+
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return alert;
+                    },
+                  );
+                },
+                child: GridTile(
+                  child: CachedNetworkImage(
+                    imageUrl: photoList[index].imgSrc.toString(),
+                    fit: BoxFit.cover,
+                  ),
+                  footer: GridTileBar(
+                    backgroundColor: Colors.black54,
+                    title: Center(
+                      child: Text(
+                        photoList[index].id.toString(),
+                        style: const TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.bold),
+                      ),
                     ),
                   ),
                 ),
@@ -113,9 +127,9 @@ class _GridViewPageState extends State<GridViewPage> {
     );
   }
 
-  Widget firstPageLoadedWidget(
-      int itemCount, List<Photos> photoList, ScrollController controller,Key pageKey) {
-    return gridViewBuilder(itemCount, photoList, controller,pageKey);
+  Widget firstPageLoadedWidget(int itemCount, List<Photos> photoList,
+      ScrollController controller, Key pageKey) {
+    return gridViewBuilder(itemCount, photoList, controller, pageKey);
   }
 
   Widget firstPageErrorWidget() {
@@ -124,34 +138,34 @@ class _GridViewPageState extends State<GridViewPage> {
     );
   }
 
-  Widget newPageLoadingWidget(
-      int itemCount, List<Photos> photoList, ScrollController controller,Key pageKey) {
+  Widget newPageLoadingWidget(int itemCount, List<Photos> photoList,
+      ScrollController controller, Key pageKey) {
     return Stack(
       children: [
-        gridViewBuilder(itemCount, photoList, controller,pageKey),
+        gridViewBuilder(itemCount, photoList, controller, pageKey),
         bottomIndicator(),
       ],
     );
   }
 
-  Widget newPageNoItemsFoundWidget(
-      int itemCount, List<Photos> photoList, ScrollController controller,Key pageKey) {
+  Widget newPageNoItemsFoundWidget(int itemCount, List<Photos> photoList,
+      ScrollController controller, Key pageKey) {
     return Column(
       children: [
         Expanded(
-          child: gridViewBuilder(itemCount, photoList, controller,pageKey),
+          child: gridViewBuilder(itemCount, photoList, controller, pageKey),
         ),
         bottomMessage("İlave içerik bulunamadı")
       ],
     );
   }
 
-  Widget newPageErrorWidget(
-      int itemCount, List<Photos> photoList, ScrollController controller,Key pageKey) {
+  Widget newPageErrorWidget(int itemCount, List<Photos> photoList,
+      ScrollController controller, Key pageKey) {
     return Column(
       children: [
         Expanded(
-          child: gridViewBuilder(itemCount, photoList, controller,pageKey),
+          child: gridViewBuilder(itemCount, photoList, controller, pageKey),
         ),
         bottomMessage("Yeni sayfa bulunamadı")
       ],
