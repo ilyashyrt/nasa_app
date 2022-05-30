@@ -80,7 +80,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
             spiritController.getInitialPhotos(cameraName: itemList[index]);
           }
         },
-        child: Text(itemList[index]),
+        child: Text(itemList[index].toUpperCase()),
       );
     }));
   }
