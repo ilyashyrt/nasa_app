@@ -62,21 +62,29 @@ class _CustomAppBarState extends State<CustomAppBar> {
     });
   }
 
-  List<PopupMenuItem<dynamic>> buildPopupMenu(RxList<String> itemList,
-      {CuriosityController? curiosityController,
-      OpportunityController? opportunityController,
-      SpiritController? spiritController}) {
+  List<PopupMenuItem<dynamic>> buildPopupMenu(
+    RxList<String> itemList, {
+    CuriosityController? curiosityController,
+    OpportunityController? opportunityController,
+    SpiritController? spiritController,
+  }) {
     return List.generate(itemList.length, ((index) {
       return PopupMenuItem(
         onTap: () {
           if (curiosityController != null) {
+            curiosityController.curiosityCameraName.value = itemList[index];
             curiosityController.curiosityList.clear();
+            curiosityController.pageKey.value = 1;
             curiosityController.getInitialPhotos(cameraName: itemList[index]);
           } else if (opportunityController != null) {
+            opportunityController.opportunityCameraName.value = itemList[index];
             opportunityController.opportunityList.clear();
+            opportunityController.pageKey.value = 1;
             opportunityController.getInitialPhotos(cameraName: itemList[index]);
           } else if (spiritController != null) {
+            spiritController.spiritCameraName.value = itemList[index];
             spiritController.spiritList.clear();
+            spiritController.pageKey.value = 1;
             spiritController.getInitialPhotos(cameraName: itemList[index]);
           }
         },

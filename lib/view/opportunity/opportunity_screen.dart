@@ -25,15 +25,15 @@ class _OpportunityScreenState extends State<OpportunityScreen> {
 
   void createScrollController() {
     scrollController = ScrollController();
-    scrollController.addListener(() => loadMorePhotos());
+    scrollController.addListener(() => loadMorePhotos(cameraName: controller.opportunityCameraName.value));
   }
 
-  Future<void> loadMorePhotos() async {
+  Future<void> loadMorePhotos({String? cameraName}) async {
     if (scrollController.position.pixels >=
             scrollController.position.maxScrollExtent &&
         controller.pageStatus.value != PageStatus.newPageLoading) {
       print("ffdfsfd");
-      await controller.loadMorePhotos();
+      await controller.loadMorePhotos(cameraName: cameraName);
     }
   }
 
@@ -44,7 +44,7 @@ class _OpportunityScreenState extends State<OpportunityScreen> {
           itemCount: controller.opportunityList.length,
           photoList: controller.opportunityList,
           controller: scrollController,
-          pageKey: const PageStorageKey<String>('opportunity'),
+          pageKey: PageStorageKey<String>(controller.opportunityCameraName.value == "" ? "opportunity" : "opportunity" + controller.opportunityCameraName.value),
         ));
   }
 

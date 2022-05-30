@@ -17,4 +17,7 @@ class BaseController extends GetxController {
       ["fhaz", "rhaz", "navcam", "pancam", "minites"].obs;
   var spiritCameraList =
       ["fhaz", "rhaz", "navcam", "pancam", "minites"].obs;
+  
+  
+  
 }

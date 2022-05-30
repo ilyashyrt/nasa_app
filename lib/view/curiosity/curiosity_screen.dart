@@ -4,7 +4,6 @@ import 'package:nasa_app/view/curiosity/curiosity_controller.dart';
 import 'package:nasa_app/constants/page_status.dart';
 import 'package:nasa_app/view/gridview_page.dart';
 
-
 class CuriosityScreen extends StatefulWidget {
   const CuriosityScreen({Key? key}) : super(key: key);
 
@@ -23,15 +22,15 @@ class _CuriosityScreenState extends State<CuriosityScreen> {
 
   void createScrollController() {
     scrollController = ScrollController();
-    scrollController.addListener(() => loadMorePhotos());
+    scrollController.addListener(() => loadMorePhotos(cameraName: controller.curiosityCameraName.value));
   }
 
-  Future<void> loadMorePhotos() async {
+  Future<void> loadMorePhotos({String? cameraName}) async {
     if (scrollController.position.pixels >=
             scrollController.position.maxScrollExtent &&
         controller.pageStatus.value != PageStatus.newPageLoading) {
-      print("ffdfsfd");
-      await controller.loadMorePhotos();
+      await controller.loadMorePhotos(cameraName: cameraName);
+      print(cameraName);
     }
   }
 
@@ -43,7 +42,7 @@ class _CuriosityScreenState extends State<CuriosityScreen> {
           itemCount: controller.curiosityList.length,
           photoList: controller.curiosityList,
           controller: scrollController,
-          pageKey: const PageStorageKey<String>('curiosity'),
+          pageKey: PageStorageKey<String>(controller.curiosityCameraName.value == "" ? "curiosity" : "curiosity" + controller.curiosityCameraName.value),
         ));
   }
 
