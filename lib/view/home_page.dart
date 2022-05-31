@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nasa_app/base_controller.dart';
+import 'package:nasa_app/constants/app_constants.dart';
 import 'package:nasa_app/view/curiosity/curiosity_screen.dart';
 import 'package:nasa_app/view/opportunity/opportunity_screen.dart';
 import 'package:nasa_app/view/spirit/spirit_screen.dart';
@@ -38,7 +39,7 @@ class _HomePageState extends State<HomePage> {
                     ],
                   )
                 : const Center(
-                    child: Text("Lütfen internet bağlantınızı kontrol ediniz!"),
+                    child: Text(AppConstants.checkConnectionText),
                   ))));
   }
 }

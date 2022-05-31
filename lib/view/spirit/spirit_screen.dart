@@ -31,7 +31,6 @@ class _SpiritScreenState extends State<SpiritScreen> {
     if (scrollController.position.pixels >=
             scrollController.position.maxScrollExtent &&
         controller.pageStatus.value != PageStatus.newPageLoading) {
-      print("ffdfsfd");
       await controller.loadMorePhotos(cameraName: cameraName);
     }
   }

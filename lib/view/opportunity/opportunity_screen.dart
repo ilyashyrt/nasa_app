@@ -32,7 +32,7 @@ class _OpportunityScreenState extends State<OpportunityScreen> {
     if (scrollController.position.pixels >=
             scrollController.position.maxScrollExtent &&
         controller.pageStatus.value != PageStatus.newPageLoading) {
-      print("ffdfsfd");
+
       await controller.loadMorePhotos(cameraName: cameraName);
     }
   }

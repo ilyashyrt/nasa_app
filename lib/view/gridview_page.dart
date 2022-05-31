@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nasa_app/constants/app_constants.dart';
 import 'package:nasa_app/view/curiosity/curiosity_controller.dart';
 import 'package:nasa_app/models/nasa_model.dart';
 import 'package:nasa_app/constants/page_status.dart';
@@ -83,8 +84,10 @@ class _GridViewPageState extends State<GridViewPage> {
             itemBuilder: (BuildContext context, index) {
               return InkWell(
                 onTap: () {
-                  BlurryDialog alert = BlurryDialog( photoList: photoList,index: index, content: "fdsdfdsdfs",
-                      );
+                  BlurryDialog alert = BlurryDialog(
+                    photoList: photoList,
+                    index: index,
+                  );
 
                   showDialog(
                     context: context,
@@ -123,7 +126,7 @@ class _GridViewPageState extends State<GridViewPage> {
 
   Widget firstPageNoItemsFoundWidget() {
     return const Center(
-      child: Text("İçerik bulunmadı"),
+      child: Text(AppConstants.noContentFoundText),
     );
   }
 
@@ -134,7 +137,7 @@ class _GridViewPageState extends State<GridViewPage> {
 
   Widget firstPageErrorWidget() {
     return const Center(
-      child: Text("Hata oluştu"),
+      child: Text(AppConstants.anErrorOccurredText),
     );
   }
 
@@ -155,7 +158,7 @@ class _GridViewPageState extends State<GridViewPage> {
         Expanded(
           child: gridViewBuilder(itemCount, photoList, controller, pageKey),
         ),
-        bottomMessage("İlave içerik bulunamadı")
+        bottomMessage(AppConstants.noAdditionalContentText)
       ],
     );
   }
@@ -167,7 +170,7 @@ class _GridViewPageState extends State<GridViewPage> {
         Expanded(
           child: gridViewBuilder(itemCount, photoList, controller, pageKey),
         ),
-        bottomMessage("Yeni sayfa bulunamadı")
+        bottomMessage(AppConstants.newPageNotFoundText)
       ],
     );
   }

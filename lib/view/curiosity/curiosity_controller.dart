@@ -16,14 +16,14 @@ class CuriosityController extends GetxController {
   var pageKey = 1.obs;
   var pageStorageIndex = 0.obs;
 
-  Future<void> getData(int pageKey,{String? cameraName}) async {
+  Future<void> getData(int pageKey, {String? cameraName}) async {
     String apiUrl = "";
-    if(cameraName == null || cameraName == "" || cameraName == "ALL"){
+    if (cameraName == null || cameraName == "" || cameraName == "ALL") {
       apiUrl =
-        "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&api_key=${AppConstants.apiKey}&page=$pageKey";
-    }else{
+          "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&api_key=${AppConstants.apiKey}&page=$pageKey";
+    } else {
       apiUrl =
-        "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&camera=$cameraName&api_key=${AppConstants.apiKey}&page=$pageKey";
+          "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&camera=$cameraName&api_key=${AppConstants.apiKey}&page=$pageKey";
     }
     final response = await http.get(Uri.parse(apiUrl));
     print(apiUrl);
@@ -46,7 +46,7 @@ class CuriosityController extends GetxController {
     pageStatus.value = PageStatus.firstPageLoading;
 
     try {
-      await getData(1,cameraName: cameraName);
+      await getData(1, cameraName: cameraName);
       if (curiosityList.isEmpty) {
         pageStatus.value = PageStatus.firstPageNoItemsFound;
       } else {
@@ -63,7 +63,7 @@ class CuriosityController extends GetxController {
 
     try {
       int currentPhotosCount = curiosityList.length;
-      await getData(pageKey.value,cameraName: cameraName);
+      await getData(pageKey.value, cameraName: cameraName);
       if (currentPhotosCount == curiosityList.length) {
         pageStatus.value = PageStatus.newPageNoItemsFound;
       } else {
@@ -74,7 +74,8 @@ class CuriosityController extends GetxController {
     }
   }
 
-  void buildCuriosityControllerOnTap(CuriosityController curiosityController, RxList<String> itemList, int index) {
+  void buildCuriosityControllerOnTap(CuriosityController curiosityController,
+      RxList<String> itemList, int index) {
     curiosityController.curiosityCameraName.value = itemList[index];
     curiosityController.curiosityList.clear();
     curiosityController.pageKey.value = 1;

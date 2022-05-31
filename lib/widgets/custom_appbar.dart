@@ -28,7 +28,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
   Widget build(BuildContext context) {
     return Obx(() {
       return AppBar(
-        title: const Text("MARS ROVER PHOTOS"),
+        title: const Text(AppConstants.marsRoverPhotosText),
         centerTitle: true,
         backgroundColor: AppConstants.nasaBlueColor,
         actions: [
@@ -53,13 +53,13 @@ class _CustomAppBarState extends State<CustomAppBar> {
             }),
             tabs: const [
               Tab(
-                text: "Curiosity",
+                text: AppConstants.curiosityText,
               ),
               Tab(
-                text: "Opportunity",
+                text: AppConstants.opportunityText,
               ),
               Tab(
-                text: "Spirit",
+                text: AppConstants.spiritText,
               )
             ]),
       );
