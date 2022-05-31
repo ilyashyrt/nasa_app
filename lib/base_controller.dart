@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 class BaseController extends GetxController {
   var initialIndex = 0.obs;
   var curiosityCameraList = [
+    "ALL",
     "fhaz",
     "rhaz",
     "mast",
@@ -17,8 +18,9 @@ class BaseController extends GetxController {
     "minites"
   ].obs;
   var opportunityCameraList =
-      ["fhaz", "rhaz", "navcam", "pancam", "minites"].obs;
-  var spiritCameraList = ["fhaz", "rhaz", "navcam", "pancam", "minites"].obs;
+      ["ALL", "fhaz", "rhaz", "navcam", "pancam", "minites"].obs;
+  var spiritCameraList =
+      ["ALL", "fhaz", "rhaz", "navcam", "pancam", "minites"].obs;
 
   var connectionIsEnabled = true.obs;
   final Connectivity connectivity = Connectivity();

@@ -18,7 +18,7 @@ class CuriosityController extends GetxController {
 
   Future<void> getData(int pageKey,{String? cameraName}) async {
     String apiUrl = "";
-    if(cameraName == null || cameraName == ""){
+    if(cameraName == null || cameraName == "" || cameraName == "ALL"){
       apiUrl =
         "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&api_key=${AppConstants.apiKey}&page=$pageKey";
     }else{
@@ -72,5 +72,13 @@ class CuriosityController extends GetxController {
     } catch (e) {
       pageStatus.value = PageStatus.newPageError;
     }
+  }
+
+  void buildCuriosityControllerOnTap(CuriosityController curiosityController, RxList<String> itemList, int index) {
+    curiosityController.curiosityCameraName.value = itemList[index];
+    curiosityController.curiosityList.clear();
+    curiosityController.pageKey.value = 1;
+    curiosityController.pageStorageIndex.value++;
+    curiosityController.getInitialPhotos(cameraName: itemList[index]);
   }
 }

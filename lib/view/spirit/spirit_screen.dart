@@ -23,7 +23,8 @@ class _SpiritScreenState extends State<SpiritScreen> {
 
   void createScrollController() {
     scrollController = ScrollController();
-    scrollController.addListener(() => loadMorePhotos(cameraName: controller.spiritCameraName.value));
+    scrollController.addListener(
+        () => loadMorePhotos(cameraName: controller.spiritCameraName.value));
   }
 
   Future<void> loadMorePhotos({String? cameraName}) async {
@@ -42,6 +43,12 @@ class _SpiritScreenState extends State<SpiritScreen> {
         itemCount: controller.spiritList.length,
         photoList: controller.spiritList,
         controller: scrollController,
-        pageKey: PageStorageKey<String>(controller.spiritCameraName.value == "" ? "spirit" : "spirit" + controller.spiritCameraName.value + controller.pageStorageIndex.string)));
+        pageKey: PageStorageKey<String>(
+          controller.spiritCameraName.value == ""
+              ? "spirit"
+              : "spirit" +
+                  controller.spiritCameraName.value +
+                  controller.pageStorageIndex.string,
+        )));
   }
 }

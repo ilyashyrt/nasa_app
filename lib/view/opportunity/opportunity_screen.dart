@@ -4,7 +4,6 @@ import 'package:nasa_app/view/opportunity/opportunity_controller.dart';
 import 'package:nasa_app/constants/page_status.dart';
 import 'package:nasa_app/view/gridview_page.dart';
 
-
 class OpportunityScreen extends StatefulWidget {
   const OpportunityScreen({Key? key}) : super(key: key);
 
@@ -25,7 +24,8 @@ class _OpportunityScreenState extends State<OpportunityScreen> {
 
   void createScrollController() {
     scrollController = ScrollController();
-    scrollController.addListener(() => loadMorePhotos(cameraName: controller.opportunityCameraName.value));
+    scrollController.addListener(() =>
+        loadMorePhotos(cameraName: controller.opportunityCameraName.value));
   }
 
   Future<void> loadMorePhotos({String? cameraName}) async {
@@ -44,7 +44,13 @@ class _OpportunityScreenState extends State<OpportunityScreen> {
           itemCount: controller.opportunityList.length,
           photoList: controller.opportunityList,
           controller: scrollController,
-          pageKey: PageStorageKey<String>(controller.opportunityCameraName.value == "" ? "opportunity" : "opportunity" + controller.opportunityCameraName.value + controller.pageStorageIndex.string),
+          pageKey: PageStorageKey<String>(
+            controller.opportunityCameraName.value == ""
+                ? "opportunity"
+                : "opportunity" +
+                    controller.opportunityCameraName.value +
+                    controller.pageStorageIndex.string,
+          ),
         ));
   }
 

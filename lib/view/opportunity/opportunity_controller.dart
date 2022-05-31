@@ -15,7 +15,7 @@ class OpportunityController extends GetxController{
 
   Future<void> getData(int pageKey,{String? cameraName}) async {
     String apiUrl = "";
-    if(cameraName == null || cameraName == ""){
+    if(cameraName == null || cameraName == "" || cameraName == "ALL"){
       apiUrl =
         "https://api.nasa.gov/mars-photos/api/v1/rovers/opportunity/photos?sol=1000&api_key=${AppConstants.apiKey}&page=$pageKey";
     }else{
@@ -69,5 +69,13 @@ class OpportunityController extends GetxController{
     } catch (e) {
       pageStatus.value = PageStatus.newPageError;
     }
+  }
+
+  void buildOpportunityControllerOnTap(OpportunityController opportunityController, RxList<String> itemList, int index) {
+    opportunityController.opportunityCameraName.value = itemList[index];
+    opportunityController.opportunityList.clear();
+    opportunityController.pageKey.value = 1;
+    opportunityController.pageStorageIndex.value++;
+    opportunityController.getInitialPhotos(cameraName: itemList[index]);
   }
 }

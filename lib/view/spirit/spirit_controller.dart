@@ -13,14 +13,14 @@ class SpiritController extends GetxController {
   var pageKey = 1.obs;
   var pageStorageIndex = 0.obs;
 
-  Future<void> getData(int pageKey,{String? cameraName}) async {
+  Future<void> getData(int pageKey, {String? cameraName}) async {
     String apiUrl = "";
-    if(cameraName == null || cameraName == ""){
+    if (cameraName == null || cameraName == "" || cameraName == "ALL") {
       apiUrl =
-        "https://api.nasa.gov/mars-photos/api/v1/rovers/spirit/photos?sol=1000&api_key=${AppConstants.apiKey}&page=$pageKey";
-    }else{
+          "https://api.nasa.gov/mars-photos/api/v1/rovers/spirit/photos?sol=1000&api_key=${AppConstants.apiKey}&page=$pageKey";
+    } else {
       apiUrl =
-        "https://api.nasa.gov/mars-photos/api/v1/rovers/spirit/photos?sol=1000&camera=$cameraName&api_key=${AppConstants.apiKey}&page=$pageKey";
+          "https://api.nasa.gov/mars-photos/api/v1/rovers/spirit/photos?sol=1000&camera=$cameraName&api_key=${AppConstants.apiKey}&page=$pageKey";
     }
     final response = await http.get(Uri.parse(apiUrl));
     print(apiUrl);
@@ -43,7 +43,7 @@ class SpiritController extends GetxController {
     pageStatus.value = PageStatus.firstPageLoading;
 
     try {
-      await getData(1,cameraName: cameraName);
+      await getData(1, cameraName: cameraName);
       if (spiritList.isEmpty) {
         pageStatus.value = PageStatus.firstPageNoItemsFound;
       } else {
@@ -60,7 +60,7 @@ class SpiritController extends GetxController {
 
     try {
       int currentPhotosCount = spiritList.length;
-      await getData(pageKey.value,cameraName: cameraName);
+      await getData(pageKey.value, cameraName: cameraName);
       if (currentPhotosCount == spiritList.length) {
         pageStatus.value = PageStatus.newPageNoItemsFound;
       } else {
@@ -69,5 +69,13 @@ class SpiritController extends GetxController {
     } catch (e) {
       pageStatus.value = PageStatus.newPageError;
     }
+  }
+
+   void buildSpiritControllerOnTap(SpiritController spiritController, RxList<String> itemList, int index) {
+    spiritController.spiritCameraName.value = itemList[index];
+    spiritController.spiritList.clear();
+    spiritController.pageKey.value = 1;
+    spiritController.pageStorageIndex.value++;
+    spiritController.getInitialPhotos(cameraName: itemList[index]);
   }
 }

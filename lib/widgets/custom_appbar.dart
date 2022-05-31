@@ -28,6 +28,8 @@ class _CustomAppBarState extends State<CustomAppBar> {
   Widget build(BuildContext context) {
     return Obx(() {
       return AppBar(
+        title: const Text("MARS ROVER PHOTOS"),
+        centerTitle: true,
         backgroundColor: AppConstants.nasaBlueColor,
         actions: [
           widget.baseController.initialIndex.value == 0
@@ -73,28 +75,29 @@ class _CustomAppBarState extends State<CustomAppBar> {
     return List.generate(itemList.length, ((index) {
       return PopupMenuItem(
         onTap: () {
-          if (curiosityController != null) {
-            curiosityController.curiosityCameraName.value = itemList[index];
-            curiosityController.curiosityList.clear();
-            curiosityController.pageKey.value = 1;
-            curiosityController.pageStorageIndex.value++;
-            curiosityController.getInitialPhotos(cameraName: itemList[index]);
-          } else if (opportunityController != null) {
-            opportunityController.opportunityCameraName.value = itemList[index];
-            opportunityController.opportunityList.clear();
-            opportunityController.pageKey.value = 1;
-            opportunityController.pageStorageIndex.value++;
-            opportunityController.getInitialPhotos(cameraName: itemList[index]);
-          } else if (spiritController != null) {
-            spiritController.spiritCameraName.value = itemList[index];
-            spiritController.spiritList.clear();
-            spiritController.pageKey.value = 1;
-            spiritController.pageStorageIndex.value++;
-            spiritController.getInitialPhotos(cameraName: itemList[index]);
-          }
+          buildControllersOnTap(curiosityController, itemList, index,
+              opportunityController, spiritController);
         },
         child: Text(itemList[index].toUpperCase()),
       );
     }));
+  }
+
+  void buildControllersOnTap(
+      CuriosityController? curiosityController,
+      RxList<String> itemList,
+      int index,
+      OpportunityController? opportunityController,
+      SpiritController? spiritController) {
+    if (curiosityController != null) {
+      curiosityController.buildCuriosityControllerOnTap(
+          curiosityController, itemList, index);
+    } else if (opportunityController != null) {
+      opportunityController.buildOpportunityControllerOnTap(
+          opportunityController, itemList, index);
+    } else if (spiritController != null) {
+      spiritController.buildSpiritControllerOnTap(
+          spiritController, itemList, index);
+    }
   }
 }

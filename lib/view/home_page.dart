@@ -4,7 +4,6 @@ import 'package:nasa_app/base_controller.dart';
 import 'package:nasa_app/view/curiosity/curiosity_screen.dart';
 import 'package:nasa_app/view/opportunity/opportunity_screen.dart';
 import 'package:nasa_app/view/spirit/spirit_screen.dart';
-import 'package:nasa_app/widgets/blurry_dialog.dart';
 import 'package:nasa_app/widgets/custom_appbar.dart';
 
 class HomePage extends StatefulWidget {
@@ -31,14 +30,14 @@ class _HomePageState extends State<HomePage> {
               baseController: baseController,
             ),
             body: Obx(() => baseController.connectionIsEnabled.value == true
-                ? TabBarView(
+                ? const TabBarView(
                     children: [
                       CuriosityScreen(),
                       OpportunityScreen(),
                       SpiritScreen(),
                     ],
                   )
-                : Center(
+                : const Center(
                     child: Text("Lütfen internet bağlantınızı kontrol ediniz!"),
                   ))));
   }

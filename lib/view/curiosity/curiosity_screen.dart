@@ -22,7 +22,8 @@ class _CuriosityScreenState extends State<CuriosityScreen> {
 
   void createScrollController() {
     scrollController = ScrollController();
-    scrollController.addListener(() => loadMorePhotos(cameraName: controller.curiosityCameraName.value));
+    scrollController.addListener(
+        () => loadMorePhotos(cameraName: controller.curiosityCameraName.value));
   }
 
   Future<void> loadMorePhotos({String? cameraName}) async {
@@ -42,7 +43,13 @@ class _CuriosityScreenState extends State<CuriosityScreen> {
           itemCount: controller.curiosityList.length,
           photoList: controller.curiosityList,
           controller: scrollController,
-          pageKey: PageStorageKey<String>(controller.curiosityCameraName.value == "" ? "curiosity" : "curiosity" + controller.curiosityCameraName.value + controller.pageStorageIndex.string),
+          pageKey: PageStorageKey<String>(
+            controller.curiosityCameraName.value == ""
+                ? "curiosity"
+                : "curiosity" +
+                    controller.curiosityCameraName.value +
+                    controller.pageStorageIndex.string,
+          ),
         ));
   }
 
@@ -51,6 +58,4 @@ class _CuriosityScreenState extends State<CuriosityScreen> {
     scrollController.dispose();
     super.dispose();
   }
-
-  
 }
