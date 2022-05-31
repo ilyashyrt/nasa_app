@@ -33,7 +33,6 @@ dependencies:
   get: ^4.6.5
   cached_network_image: ^3.2.1
   connectivity_plus: ^2.3.0
-  fluttertoast: ^8.0.9
   
 
 
