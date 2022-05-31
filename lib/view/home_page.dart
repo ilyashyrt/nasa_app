@@ -39,7 +39,11 @@ class _HomePageState extends State<HomePage> {
                     ],
                   )
                 : const Center(
-                    child: Text(AppConstants.checkConnectionText),
+                    child: Text(
+                      AppConstants.checkConnectionText,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 22),
+                    ),
                   ))));
   }
 }

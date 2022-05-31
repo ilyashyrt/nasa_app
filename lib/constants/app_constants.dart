@@ -6,7 +6,6 @@ class AppConstants {
 
   //Colors
   static const Color nasaBlueColor = Color.fromRGBO(11, 61, 145, 1);
-  static const Color nasaRedColor = Color.fromRGBO(252, 61, 33, 1);
 
   //Texts
   static const String roverNameText = "Rover Name: ";

@@ -126,7 +126,10 @@ class _GridViewPageState extends State<GridViewPage> {
 
   Widget firstPageNoItemsFoundWidget() {
     return const Center(
-      child: Text(AppConstants.noContentFoundText),
+      child: Text(
+        AppConstants.noContentFoundText,
+        style: TextStyle(fontSize: 22),
+      ),
     );
   }
 
@@ -137,7 +140,10 @@ class _GridViewPageState extends State<GridViewPage> {
 
   Widget firstPageErrorWidget() {
     return const Center(
-      child: Text(AppConstants.anErrorOccurredText),
+      child: Text(
+        AppConstants.anErrorOccurredText,
+        style: TextStyle(fontSize: 22),
+      ),
     );
   }
 
@@ -187,11 +193,9 @@ class _GridViewPageState extends State<GridViewPage> {
   }
 
   Widget bottomMessage(String message) {
-    return bottomWidget(
-      child: Padding(
-        padding: const EdgeInsets.all(18.0),
-        child: Text(message),
-      ),
+    return Padding(
+      padding: const EdgeInsets.all(18.0),
+      child: Text(message),
     );
   }
 
