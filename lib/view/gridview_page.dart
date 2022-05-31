@@ -96,21 +96,22 @@ class _GridViewPageState extends State<GridViewPage> {
                     },
                   );
                 },
-                child: GridTile(
-                  child: CachedNetworkImage(
-                    imageUrl: photoList[index].imgSrc.toString(),
-                    fit: BoxFit.cover,
-                  ),
-                  footer: GridTileBar(
-                    backgroundColor: Colors.black54,
-                    title: Center(
-                      child: Text(
-                        photoList[index].id.toString(),
-                        style: const TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.bold),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(15),
+                  child: GridTile(
+                      child: CachedNetworkImage(
+                        imageUrl: photoList[index].imgSrc.toString(),
+                        fit: BoxFit.cover,
                       ),
-                    ),
-                  ),
+                      footer: Container(
+                        height: 30,
+                        child: Center(
+                            child: Text(
+                          photoList[index].camera!.name.toString(),
+                          style: const TextStyle(color: Colors.white),
+                        )),
+                        color: Colors.black54,
+                      )),
                 ),
               );
             }));

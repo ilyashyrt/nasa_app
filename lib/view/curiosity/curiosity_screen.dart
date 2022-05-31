@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:nasa_app/constants/app_constants.dart';
 import 'package:nasa_app/view/curiosity/curiosity_controller.dart';
 import 'package:nasa_app/constants/page_status.dart';
 import 'package:nasa_app/view/gridview_page.dart';

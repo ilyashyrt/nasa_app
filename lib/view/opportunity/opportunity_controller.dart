@@ -1,10 +1,7 @@
-import 'dart:convert';
 
 import 'package:get/get.dart';
 import 'package:nasa_app/base_controller.dart';
-import 'package:nasa_app/constants/app_constants.dart';
 import 'package:nasa_app/constants/page_status.dart';
-import 'package:http/http.dart' as http;
 import '../../models/nasa_model.dart';
 
 class OpportunityController extends GetxController {

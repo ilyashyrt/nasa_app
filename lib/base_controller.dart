@@ -3,13 +3,9 @@ import 'dart:convert';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:get/get.dart';
-import 'package:nasa_app/bindings/curiosity_binding.dart';
 import 'package:nasa_app/constants/app_constants.dart';
 import 'package:nasa_app/constants/page_status.dart';
 import 'package:nasa_app/models/nasa_model.dart';
-import 'package:nasa_app/view/curiosity/curiosity_controller.dart';
-import 'package:nasa_app/view/opportunity/opportunity_controller.dart';
-import 'package:nasa_app/view/spirit/spirit_controller.dart';
 import 'package:http/http.dart' as http;
 
 class BaseController extends GetxController {
@@ -25,7 +21,7 @@ class BaseController extends GetxController {
     "mardi",
     "navcam",
     "pancam",
-    "minites"
+    "minites",
   ].obs;
   var opportunityCameraList =
       ["ALL", "fhaz", "rhaz", "navcam", "pancam", "minites"].obs;
@@ -57,7 +53,6 @@ class BaseController extends GetxController {
       throw Exception(e);
     }
   }
-
 
   Future getInitialPhotos(
       Rx<PageStatus> pageStatus, List<Photos> photoList, String roverName,

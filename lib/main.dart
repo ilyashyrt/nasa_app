@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nasa_app/bindings/base_binding.dart';
-import 'package:nasa_app/view/home_page.dart';
 
 import 'routes/app_pages.dart';
 import 'routes/app_routes.dart';
