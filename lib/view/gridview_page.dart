@@ -15,13 +15,15 @@ class GridViewPage extends StatefulWidget {
   final List<Photos> photoList;
   final ScrollController controller;
   final Key pageKey;
+  final Rx<bool> isLoading;
   const GridViewPage(
       {Key? key,
       required this.pageStatus,
       required this.itemCount,
       required this.photoList,
       required this.controller,
-      required this.pageKey})
+      required this.pageKey,
+      required this.isLoading})
       : super(key: key);
 
   @override
@@ -74,6 +76,9 @@ class _GridViewPageState extends State<GridViewPage> {
         key: pageKey,
         bucket: pageStorageBucket,
         child: GridView.builder(
+            physics: widget.isLoading.value == true
+                ? const NeverScrollableScrollPhysics()
+                : const AlwaysScrollableScrollPhysics(),
             controller: scrollController,
             gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
                 maxCrossAxisExtent: 200,
@@ -136,6 +141,7 @@ class _GridViewPageState extends State<GridViewPage> {
 
   Widget firstPageLoadedWidget(int itemCount, List<Photos> photoList,
       ScrollController controller, Key pageKey) {
+    widget.isLoading.value = false;
     return gridViewBuilder(itemCount, photoList, controller, pageKey);
   }
 
@@ -150,6 +156,7 @@ class _GridViewPageState extends State<GridViewPage> {
 
   Widget newPageLoadingWidget(int itemCount, List<Photos> photoList,
       ScrollController controller, Key pageKey) {
+    widget.isLoading.value = true;
     return Stack(
       children: [
         gridViewBuilder(itemCount, photoList, controller, pageKey),
@@ -160,6 +167,7 @@ class _GridViewPageState extends State<GridViewPage> {
 
   Widget newPageNoItemsFoundWidget(int itemCount, List<Photos> photoList,
       ScrollController controller, Key pageKey) {
+    widget.isLoading.value = false;
     return Column(
       children: [
         Expanded(
@@ -172,6 +180,7 @@ class _GridViewPageState extends State<GridViewPage> {
 
   Widget newPageErrorWidget(int itemCount, List<Photos> photoList,
       ScrollController controller, Key pageKey) {
+    widget.isLoading.value = false;
     return Column(
       children: [
         Expanded(

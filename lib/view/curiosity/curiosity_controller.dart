@@ -13,6 +13,7 @@ class CuriosityController extends GetxController {
   var pageKey = 1.obs;
   var pageStorageIndex = 0.obs;
   var roverName = "curiosity".obs;
+  var isLoading = false.obs;
 
   Future<void> getData({String? cameraName}) async {
     await baseController.getData(pageKey, roverName.value, curiosityList,

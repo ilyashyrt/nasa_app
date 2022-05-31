@@ -42,6 +42,7 @@ class _CuriosityScreenState extends State<CuriosityScreen> {
           itemCount: controller.curiosityList.length,
           photoList: controller.curiosityList,
           controller: scrollController,
+          isLoading: controller.isLoading,
           pageKey: PageStorageKey<String>(
             controller.curiosityCameraName.value == ""
                 ? "curiosity"
