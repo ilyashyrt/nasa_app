@@ -1,4 +1,3 @@
-
 import 'package:get/get.dart';
 import 'package:nasa_app/base_controller.dart';
 import 'package:nasa_app/models/nasa_model.dart';
@@ -30,18 +29,21 @@ class SpiritController extends GetxController {
         cameraName: cameraName);
   }
 
+  void buildSpiritControllerOnTap(RxList<String> itemList, int index,
+      {String? cameraName}) {
+    baseController.buildControllersOnTap(
+        spiritCameraName,
+        spiritList,
+        pageKey,
+        pageStorageIndex,
+        getInitialPhotos(cameraName: cameraName),
+        itemList,
+        index);
+  }
+
   @override
   void onInit() {
     getInitialPhotos();
     super.onInit();
-  }
-
-  void buildSpiritControllerOnTap(
-      SpiritController spiritController, RxList<String> itemList, int index) {
-    spiritController.spiritCameraName.value = itemList[index];
-    spiritController.spiritList.clear();
-    spiritController.pageKey.value = 1;
-    spiritController.pageStorageIndex.value++;
-    spiritController.getInitialPhotos(cameraName: itemList[index]);
   }
 }

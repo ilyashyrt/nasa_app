@@ -90,6 +90,21 @@ class BaseController extends GetxController {
     }
   }
 
+  void buildControllersOnTap(
+      Rx<String> camera,
+      List<Photos> photoList,
+      Rx<int> pageKey,
+      Rx<int> pageStorageIndex,
+      Future getInitialPhotos,
+      RxList<String> itemList,
+      int index) {
+    camera.value = itemList[index];
+    photoList.clear();
+    pageKey.value = 1;
+    pageStorageIndex.value++;
+    getInitialPhotos;
+  }
+
   Future<void> getConnectionState() async {
     ConnectivityResult connectivityResult;
     try {

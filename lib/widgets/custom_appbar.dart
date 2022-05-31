@@ -91,13 +91,13 @@ class _CustomAppBarState extends State<CustomAppBar> {
       SpiritController? spiritController) {
     if (curiosityController != null) {
       curiosityController.buildCuriosityControllerOnTap(
-          curiosityController, itemList, index);
+          itemList,index,cameraName: itemList[index]);
     } else if (opportunityController != null) {
       opportunityController.buildOpportunityControllerOnTap(
-          opportunityController, itemList, index);
+          itemList, index, cameraName: itemList[index]);
     } else if (spiritController != null) {
       spiritController.buildSpiritControllerOnTap(
-          spiritController, itemList, index);
+          itemList, index, cameraName: itemList[index]);
     }
   }
 }

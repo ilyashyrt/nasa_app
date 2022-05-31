@@ -30,20 +30,21 @@ class OpportunityController extends GetxController {
         cameraName: cameraName);
   }
 
+  void buildOpportunityControllerOnTap(RxList<String> itemList, int index,
+      {String? cameraName}) {
+    baseController.buildControllersOnTap(
+        opportunityCameraName,
+        opportunityList,
+        pageKey,
+        pageStorageIndex,
+        getInitialPhotos(cameraName: cameraName),
+        itemList,
+        index);
+  }
+
   @override
   void onInit() {
     getInitialPhotos();
     super.onInit();
-  }
-
-  void buildOpportunityControllerOnTap(
-      OpportunityController opportunityController,
-      RxList<String> itemList,
-      int index) {
-    opportunityController.opportunityCameraName.value = itemList[index];
-    opportunityController.opportunityList.clear();
-    opportunityController.pageKey.value = 1;
-    opportunityController.pageStorageIndex.value++;
-    opportunityController.getInitialPhotos(cameraName: itemList[index]);
   }
 }
