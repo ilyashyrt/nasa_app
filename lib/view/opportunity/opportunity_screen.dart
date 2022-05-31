@@ -14,7 +14,7 @@ class OpportunityScreen extends StatefulWidget {
 
 class _OpportunityScreenState extends State<OpportunityScreen> {
   late ScrollController scrollController;
-  final OpportunityController controller = Get.put(OpportunityController());
+  final OpportunityController controller = Get.find<OpportunityController>();
 
   @override
   void initState() {

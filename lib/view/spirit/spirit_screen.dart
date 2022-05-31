@@ -12,7 +12,7 @@ class SpiritScreen extends StatefulWidget {
 }
 
 class _SpiritScreenState extends State<SpiritScreen> {
-  final SpiritController controller = Get.put(SpiritController());
+  final SpiritController controller = Get.find<SpiritController>();
   late ScrollController scrollController;
   @override
   void initState() {

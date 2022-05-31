@@ -27,14 +27,15 @@ class BlurryDialog extends StatelessWidget {
           title: CachedNetworkImage(
             height: 150,
             width: 400,
-            imageUrl: photoList[index].imgSrc.toString(), //error builder kullan
+            imageUrl:
+                photoList[index].imgSrc.toString(), //error builder kullan
             fit: BoxFit.fill,
           ),
           content: Container(
               decoration: BoxDecoration(
                 border:
                     Border.all(width: 3.0, color: AppConstants.nasaBlueColor),
-                borderRadius: BorderRadius.all(Radius.circular(15.0) //
+                borderRadius: const BorderRadius.all(Radius.circular(15.0) //
                     ),
               ),
               child: Padding(
@@ -44,13 +45,17 @@ class BlurryDialog extends StatelessWidget {
                   children: [
                     Text("Araç Adı: ${photoList[index].rover?.name}"),
                     Text("Kamera Adı: ${photoList[index].camera?.name}"),
-                    
                   ],
                 ),
               )),
           actions: <Widget>[
             TextButton(
-              child: const Text("OK",style: TextStyle(color: AppConstants.nasaRedColor,),),
+              child: const Text(
+                "OK",
+                style: TextStyle(
+                  color: AppConstants.nasaRedColor,
+                ),
+              ),
               onPressed: () {
                 Navigator.of(context).pop();
               },

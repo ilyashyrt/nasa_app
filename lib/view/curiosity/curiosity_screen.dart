@@ -34,7 +34,7 @@ class _CuriosityScreenState extends State<CuriosityScreen> {
     }
   }
 
-  final CuriosityController controller = Get.put(CuriosityController());
+  final CuriosityController controller = Get.find<CuriosityController>();
   @override
   Widget build(BuildContext context) {
     return Obx(() => GridViewPage(
@@ -51,4 +51,6 @@ class _CuriosityScreenState extends State<CuriosityScreen> {
     scrollController.dispose();
     super.dispose();
   }
+
+  
 }
